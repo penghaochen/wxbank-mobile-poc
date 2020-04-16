@@ -46,8 +46,9 @@
           </div>
         </van-field >
         <div class="checkBox">
-          <van-checkbox v-model="checked1" class="checkItem">开通账务变动微信提醒</van-checkbox>
-          <van-checkbox v-model="checked2" class="checkItem">同时开通手机银行《安全提示》</van-checkbox>
+          <van-checkbox v-model="checked1" class="checkItem">接受华夏银行电子银行《个人客户服务协议》</van-checkbox>
+          <van-checkbox v-model="checked2" class="checkItem">开通账务变动微信提醒</van-checkbox>
+          <van-checkbox v-model="checked3" class="checkItem">同时开通手机银行《安全提示》</van-checkbox>
         </div>
         <div style="margin: 16px;">
           <van-button round block type="danger" native-type="submit">
@@ -107,7 +108,7 @@
           </div>
         </van-field >
         <div class="checkBox">
-          <van-checkbox v-model="checked3" class="checkItem">同时开通手机银行《安全提示》</van-checkbox>
+          <van-checkbox v-model="checked4" class="checkItem">同时开通手机银行《安全提示》</van-checkbox>
         </div>
         <div style="margin: 16px;">
           <van-button round block type="danger" native-type="submit">
@@ -152,6 +153,7 @@ export default {
       crePhone: '',
       creCode: '',
       checked3: '',
+      checked4: '',
       counting: false
 
     }

@@ -2,12 +2,12 @@
 <template>
   <div>
     <div class="card-box">
-      <div class="card-title"><span>华夏个人借记卡</span> <a class="btn" @click="AccountQry">查账</a></div>
-      <div class="card-center">6230 **** **** 6911</div>
-      <div class="card-mark">开户行：华夏银行北京分行</div>
+      <div class="card-title"><span><img src="@/assets/images/logo.png" style="width:30px;">华夏个人借记卡</span> <a class="btn" @click="AccountQry">查账</a></div>
+      <div class="card-center">{{ accInfo.ActNo }} <a class="btn" @click="AccountQry">定活互转</a></div>
+      <div class="card-mark">开户行：{{ accInfo.AvailBalList[0].ActOpenBankBranch }}</div>
       <div class="card-tools">
-        <div>人民币</div>
-        <div>可用余额：22,840,25</div>
+        <div>{{ accInfo.AvailBalList[0].ActCurType }}</div>
+        <div>可用余额：{{ accInfo.AvailBalList[0].ActAvaiBal }}</div>
       </div>
     </div>
     <van-cell-group>
@@ -21,15 +21,16 @@ export default {
   data() {
     return {
       shopInfos: [],
-      isLoading: false
+      isLoading: false,
+      accInfo: {}
     }
   },
   activated() {
     const data = {
-      openid: '1111'
+      openId: 'otir0snHkYfVySyfUIZTKl0LFgF0'
     }
     getAccount(data).then(res => {
-      alert(JSON.stringify(res))
+      this.accInfo = res
     }).catch(error => {
       alert(JSON.stringify(error))
     })
@@ -43,26 +44,34 @@ export default {
 </script>
 <style lang="scss">
 .card-box{
-    width:88%;
-    margin:0 auto;
+    width: 88%;
+    margin: 10px auto;
     border-radius: 14px;
     padding: 14px 10px 10px;
     background: #fbee01;
+    box-shadow: 1px 1px 1px #9c9403;
+    background-image: linear-gradient(#fbef19, #fff75f);
     .btn{
         border:1px solid #a00;
         border-radius: 14px;
         padding: 4px 10px;
         font-size: 14px;
         color: #a00;
+        min-width: 80px;
+        text-align: center;
     }
     .card-title{
         display: flex;
         justify-content: space-between;
         font-size: 20px;
+        align-items: center;
     }
     .card-center{
+        display: flex;
+        justify-content: space-between;
         padding: 20px 0;
         font-size: 20px;
+        align-items: center;
     }
     .card-mark{
         padding: 10px 0;
