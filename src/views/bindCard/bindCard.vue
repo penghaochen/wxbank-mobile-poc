@@ -3,14 +3,14 @@
   <div>
     <swiper ref="mySwiper" :options="swiperOption" class="swiper" @slideChangeTransitionEnd="slideChangeTransitionEnd">
       <swiper-slide><img src="@/assets/images/card1.jpg" class="img"></swiper-slide>
-      <!-- <swiper-slide><img src="@/assets/images/card2.jpg" class="img"></swiper-slide> -->
+      <swiper-slide><img src="@/assets/images/card2.jpg" class="img"></swiper-slide>
       <div slot="pagination" class="swiper-pagination"/>
     </swiper>
     <div v-show="activeIndex==0">
       <van-form @submit="onSubmit">
         <van-field
           v-model="cardNo"
-          :rules="[{ required: true, message: '请填写借记卡卡号' }]"
+          :rules="validate.isBankCardNo"
           type="digit"
           name="借记卡卡号"
           label="借记卡卡号"
@@ -20,7 +20,7 @@
         />
         <van-field
           v-model="phone"
-          :rules="[{ required: true, message: '请填写手机号' }]"
+          :rules="validate.isPhoneNo"
           type="tel"
           name="预留手机号"
           label="预留手机号"
@@ -30,7 +30,7 @@
         />
         <van-field
           v-model="code"
-          :rules="[{ required: true, message: '请填写短信验证码' }]"
+          :rules="validate.isMessageNo"
           type="text"
           name="短信验证码"
           label="短信验证码"
@@ -124,6 +124,9 @@
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
 import { getAccount1 } from '@/api/wxapi'
+import { isBankCardNo } from '@/utils/validate'
+import { isPhoneNo } from '@/utils/validate'
+import { isMessageNo } from '@/utils/validate'
 export default {
   name: 'SwiperExamplePagination',
   title: 'Pagination',
@@ -152,7 +155,8 @@ export default {
       crePhone: '',
       creCode: '',
       checked3: '',
-      counting: false
+      counting: false,
+     
 
     }
   },
@@ -172,6 +176,7 @@ export default {
     })
   },
   mounted() {
+    
     // const data = {
     //   openid: '1111'
     // }
