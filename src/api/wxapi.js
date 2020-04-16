@@ -64,12 +64,20 @@ export function getPhone(params) {
     params: params
   })
 }
+// 获取二维码
+export function getScanCode(params) {
+  return request({
+    url: '/GetQRcode.do',
+    method: 'get',
+    params: params
+  })
+}
 // 账户查询
 export function getAccount(params) {
   return request({
-    url: '/myaccount',
-    method: 'get',
-    params: params
+    url: '/MyAccount.do',
+    method: 'post',
+    data: params
   })
 }
 

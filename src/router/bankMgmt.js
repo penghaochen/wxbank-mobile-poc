@@ -8,5 +8,15 @@ export default [
     meta: {
       keepAlive: true
     }
+  },
+  {
+    path: '/scanCode',
+    name: 'scanCode',
+    components: {
+      default: () => import('@/views/bankMgmt/scanCode')
+    },
+    meta: {
+      keepAlive: true
+    }
   }
 ]
