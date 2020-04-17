@@ -46,7 +46,7 @@ export default {
       code: code
     }
     getauthorize(data).then(res => {
-      sessionStorage.setItem('openid', '1')
+      sessionStorage.setItem('openId', res.openId)
       alert(JSON.stringify(res))
     }).catch(error => {
       alert(error)

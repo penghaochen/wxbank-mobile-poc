@@ -26,8 +26,10 @@ export default {
     }
   },
   activated() {
+    const openId = sessionStorage.getItem('openId')
+    alert('缓存的openId' + openId)
     const data = {
-      openId: 'otir0snHkYfVySyfUIZTKl0LFgF0'
+      openId: openId || 'otir0snHkYfVySyfUIZTKl0LFgF0'
     }
     const that = this
     getAccount(data).then(res => {
