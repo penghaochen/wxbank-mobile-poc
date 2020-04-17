@@ -75,7 +75,7 @@ export function getScanCode(params) {
 // 账户查询
 export function getAccount(params) {
   return request({
-    url: '/MyAccount.do',
+    url: '/myaccount',
     method: 'post',
     data: params
   })

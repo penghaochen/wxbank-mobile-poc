@@ -31,7 +31,17 @@ service.interceptors.response.use(
   response => {
     const res = response.data
     store.state.app.show = false
-    return res
+    if (res.returnCode === '000000') {
+      // 成功
+      return res.data
+    } else {
+      // 失败
+      Dialog.alert({
+        title: '警告',
+        message: res.message
+      })
+    }
+    return res.data
   }, error => {
     console.log('err' + error)// for debug
     store.state.app.show = false

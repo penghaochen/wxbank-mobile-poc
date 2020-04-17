@@ -3,15 +3,15 @@
   <div>
     <div class="card-box">
       <div class="card-title"><span><img src="@/assets/images/logo.png" style="width:30px;">华夏个人借记卡</span> <a class="btn" @click="AccountQry">查账</a></div>
-      <div class="card-center">{{ accInfo.ActNo }} <a class="btn" @click="AccountQry">定活互转</a></div>
-      <div class="card-mark">开户行：{{ accInfo.AvailBalList[0].ActOpenBankBranch }}</div>
+      <div class="card-center">{{ accInfo.ActNo ||'加载中...' }} <a class="btn" @click="AccountQry">定活互转</a></div>
+      <div class="card-mark">开户行：{{ accInfo.AvailBalList[0].ActOpenBankBranch ||'加载中...' }}</div>
       <div class="card-tools">
-        <div>{{ accInfo.AvailBalList[0].ActCurType }}</div>
-        <div>可用余额：{{ accInfo.AvailBalList[0].ActAvaiBal }}</div>
+        <div>{{ accInfo.AvailBalList[0].ActCurType ||'加载中...' }}</div>
+        <div>可用余额：{{ accInfo.AvailBalList[0].ActAvaiBal ||'加载中...' }}</div>
       </div>
     </div>
     <van-cell-group>
-      <van-cell title="客户综合积分" value="814（北京分行）" />
+      <van-cell :value="accInfo.AvailBalList[0].CifIntegral||'0'+'（北京分行）'" title="客户综合积分" />
     </van-cell-group>
   </div>
 </template>
@@ -22,15 +22,16 @@ export default {
     return {
       shopInfos: [],
       isLoading: false,
-      accInfo: {}
+      accInfo: { 'AvailBalList': [{}] }
     }
   },
   activated() {
     const data = {
       openId: 'otir0snHkYfVySyfUIZTKl0LFgF0'
     }
+    const that = this
     getAccount(data).then(res => {
-      this.accInfo = res
+      that.accInfo = res
     }).catch(error => {
       alert(JSON.stringify(error))
     })
