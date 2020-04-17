@@ -9,7 +9,7 @@ import store from '@/store'
 // create an axios instance
 const service = axios.create({
   baseURL: '/pmobile/wcb', // api 的 base_url
-  timeout: 10000 // request timeout
+  timeout: 20000 // request timeout
 })
 
 // request interceptor
