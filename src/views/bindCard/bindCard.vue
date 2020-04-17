@@ -124,10 +124,7 @@
 <script>
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
-import { getAccount1 } from '@/api/wxapi'
-import { isBankCardNo } from '@/utils/validate'
-import { isPhoneNo } from '@/utils/validate'
-import { isMessageNo } from '@/utils/validate'
+import '@/utils/validate'
 import { getPhone } from '@/api/wxapi'
 export default {
   name: 'SwiperExamplePagination',
@@ -168,14 +165,14 @@ export default {
     }
   },
   activated() {
-    const data = {
-      openid: '1111'
-    }
-    getAccount1(data).then(res => {
-      alert(JSON.stringify(res))
-    }).catch(error => {
-      alert(JSON.stringify(error))
-    })
+    // const data = {
+    //   openid: '1111'
+    // }
+    // getAccount1(data).then(res => {
+    //   alert(JSON.stringify(res))
+    // }).catch(error => {
+    //   alert(JSON.stringify(error))
+    // })
   },
   mounted() {
     // const data = {

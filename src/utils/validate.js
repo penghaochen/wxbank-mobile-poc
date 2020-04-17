@@ -22,15 +22,15 @@ export const emailReg = /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/
  * @returns {Boolean}
  */
 export function isBankCardNo() {
-    let pattern=/^([1-9]{1})(\d{15}|\d{18})$/
-    return [{ required: true, message: '请输入借记卡卡号！' },{pattern, message: '卡号有误！' }];
+  const pattern = /^([1-9]{1})(\d{15}|\d{18})$/
+  return [{ required: true, message: '请输入借记卡卡号！' },{pattern, message: '卡号有误！' }];
 }
 /**
  * @param {string} phoneNo 手机号验证
  * @returns {Boolean}
  */
 export function isPhoneNo() {
-  let pattern=/^1[3-9]\d{9}$/
+  const pattern = /^1[3-9]\d{9}$/
   return [{ required: true, message: '请输入预留手机号！' },{pattern, message: '手机号码号有误！' }];
 }
 /**
@@ -38,7 +38,7 @@ export function isPhoneNo() {
  * @returns {Boolean}
  */
 export function isMessageNo() {
-  let pattern=/(^[0-9]{4}$)|(^[0-9]{6}$)/
+  const pattern = /(^[0-9]{4}$)|(^[0-9]{6}$)/
   return [{ required: true, message: '请输入短信验证码！' },{pattern, message: '验证码有误！' }];
 }
 
@@ -80,8 +80,8 @@ export function validatenull(val) {
   return false
 }
 
-Vue.prototype.validate={
-  isBankCardNo:isBankCardNo(),
-  isPhoneNo:isPhoneNo(),
-  isMessageNo:isMessageNo(),
-} 
+Vue.prototype.validate = {
+  isBankCardNo: isBankCardNo(),
+  isPhoneNo: isPhoneNo(),
+  isMessageNo: isMessageNo()
+}
