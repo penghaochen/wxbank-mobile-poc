@@ -3,7 +3,7 @@
   <div>
     <swiper ref="mySwiper" :options="swiperOption" class="swiper" @slideChangeTransitionEnd="slideChangeTransitionEnd">
       <swiper-slide><img src="@/assets/images/card1.jpg" class="img"></swiper-slide>
-      <swiper-slide><img src="@/assets/images/card2.jpg" class="img"></swiper-slide>
+      <!-- <swiper-slide><img src="@/assets/images/card2.jpg" class="img"></swiper-slide> -->
       <div slot="pagination" class="swiper-pagination"/>
     </swiper>
     <div v-show="activeIndex==0">
@@ -177,7 +177,7 @@ export default {
     })
   },
   mounted() {
-    
+
     // const data = {
     //   openid: '1111'
     // }
