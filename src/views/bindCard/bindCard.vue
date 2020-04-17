@@ -126,6 +126,7 @@ import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
 import '@/utils/validate'
 import { getPhone } from '@/api/wxapi'
+import { strEnc } from '@/utils/des'
 export default {
   name: 'SwiperExamplePagination',
   title: 'Pagination',
@@ -190,8 +191,9 @@ export default {
     },
     onSubmit() {
       debugger
+      const cardNo = strEnc(this.cardNo, '1', '2', '3')
       const params = {
-        No: this.cardNo,
+        No: cardNo,
         phone: this.phone,
         code: this.code,
         checked1: this.checked1,
