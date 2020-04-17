@@ -3,6 +3,8 @@
     <van-grid>
       <van-grid-item icon="photo-o" text="绑卡" @click="gotoMenu('bindCard')"/>
       <van-grid-item icon="photo-o" text="我的账户" @click="gotoMenu('account')"/>
+      <van-grid-item icon="photo-o" text="获取短信" @click="gotoMenu('bankMgmt')"/>
+      <van-grid-item icon="photo-o" text="生成二维码" @click="gotoMenu('scanCode')"/>
       <van-grid-item icon="photo-o" text="更多功能" @click="gotoMenu()"/>
     </van-grid>
   <!-- <van-row>

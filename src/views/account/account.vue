@@ -29,7 +29,7 @@ export default {
     const openId = sessionStorage.getItem('openId')
     alert('缓存的openId' + openId)
     const data = {
-      openId: openId || 'otir0snHkYfVySyfUIZTKl0LFgF0'
+      openId: openId
     }
     const that = this
     getAccount(data).then(res => {
