@@ -7,7 +7,7 @@
       <div slot="pagination" class="swiper-pagination"/>
     </swiper>
     <div v-show="activeIndex==0">
-      <van-form @submit="onSubmit">
+      <van-form @submit="onSubmit" @failed="onFailed">
         <van-field
           v-model="cardNo"
           :rules="validate.isBankCardNo"
@@ -62,7 +62,7 @@
       <van-form @submit="onSubmit">
         <van-field
           v-model="creCardNo"
-          :rules="[{ required: true, message: '请填写信用卡卡号' }]"
+          :rules="validate.isBankCardNo"
           type="digit"
           name="信用卡卡号"
           label="信用卡卡号"
@@ -82,7 +82,7 @@
         />
         <van-field
           v-model="crePhone"
-          :rules="[{ required: true, message: '请填写手机号' }]"
+          :rules="validate.isPhoneNo"
           type="tel"
           name="预留手机号"
           label="预留手机号"
@@ -92,7 +92,7 @@
         />
         <van-field
           v-model="creCode"
-          :rules="[{ required: true, message: '请填写短信验证码' }]"
+          :rules="validate.isMessageNo"
           type="text"
           name="短信验证码"
           label="短信验证码"
@@ -128,6 +128,7 @@ import { getAccount1 } from '@/api/wxapi'
 import { isBankCardNo } from '@/utils/validate'
 import { isPhoneNo } from '@/utils/validate'
 import { isMessageNo } from '@/utils/validate'
+import { getPhone } from '@/api/wxapi'
 export default {
   name: 'SwiperExamplePagination',
   title: 'Pagination',
@@ -177,7 +178,6 @@ export default {
     })
   },
   mounted() {
-
     // const data = {
     //   openid: '1111'
     // }
@@ -187,28 +187,45 @@ export default {
     //   alert(JSON.stringify(error))
     // })
   },
-
   methods: {
     slideChangeTransitionEnd() {
       this.activeIndex = this.swiper.activeIndex
     },
     onSubmit() {
+      debugger
       const params = {
-        No: this.cardNo
+        No: this.cardNo,
+        phone: this.phone,
+        code: this.code,
+        checked1: this.checked1,
+        checked2: this.checked2,
+        checked3: this.checked3
       }
-      if (this.activeIndex === 1) {
-        params.No = this.creCardNo
-      }
+      // if (this.activeIndex === 1) {
+      //   params.No = this.creCardNo
+      // }
       this.$router.push({
         name: 'bindCardRes',
         params: params
       })
     },
+    onFailed() {
+      this.$toast('验证不通过！')
+    },
     getCode() {
       if (!this.counting) {
         this.$toast('验证码已发送！')
       }
-
+      const data = {
+        Mobilephone: this.phone
+      }
+      const that = this
+      getPhone(data).then(res => {
+        that.code = res.Content
+        alert(JSON.stringify(res))
+      }).catch(error => {
+        alert(error)
+      })
       this.counting = true
     },
     countdownend() {

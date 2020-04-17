@@ -23,7 +23,7 @@ export const emailReg = /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/
  */
 export function isBankCardNo() {
     let pattern=/^([1-9]{1})(\d{15}|\d{18})$/
-    return [{ required: true, message: '请填写卡号！' },{pattern, message: '卡号有误！' }];
+    return [{ required: true, message: '请输入借记卡卡号！' },{pattern, message: '卡号有误！' }];
 }
 /**
  * @param {string} phoneNo 手机号验证
@@ -31,7 +31,7 @@ export function isBankCardNo() {
  */
 export function isPhoneNo() {
   let pattern=/^1[3-9]\d{9}$/
-  return [{ required: true, message: '请填写手机号码！' },{pattern, message: '手机号码号有误！' }];
+  return [{ required: true, message: '请输入预留手机号！' },{pattern, message: '手机号码号有误！' }];
 }
 /**
  * @param {string} messageNo 短信验证码验证
@@ -39,7 +39,7 @@ export function isPhoneNo() {
  */
 export function isMessageNo() {
   let pattern=/(^[0-9]{4}$)|(^[0-9]{6}$)/
-  return [{ required: true, message: '请填写短信验证码！' },{pattern, message: '验证码有误！' }];
+  return [{ required: true, message: '请输入短信验证码！' },{pattern, message: '验证码有误！' }];
 }
 
 /**
