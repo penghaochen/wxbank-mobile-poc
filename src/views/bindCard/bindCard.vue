@@ -14,7 +14,7 @@
         <van-field
           v-model="cardNo"
           :rules="validate.isBankCardNo.rule"
-          type="digit"
+          type="text"
           name="借记卡卡号"
           label="借记卡卡号"
           placeholder="请输入借记卡卡号"
@@ -237,19 +237,19 @@ export default {
      * @description 获取短信验证码
      */
     getCode() {
+<<<<<<< HEAD
+      debugger
+      var flag = this.validate.ruleCheck(this.cardNo, this.validate.isBankCardNo)
+      if (!flag) {
+        return
+      }
+=======
+>>>>>>> 5eb1ab5ac3ff3ffa21d6670f924e3a3ad1b05369
       if (!this.counting) {
         this.$toast('验证码已发送！')
       } else {
         this.$toast('请稍后获取！')
-        return
-      }
-      if (!this.validate.isBankCardNo.pattern.test(this.cardNo)) {
-        this.$toast('卡号验证不通过！')
-        return
-      }
-      if (!this.validate.isPhoneNo.pattern.test(this.phone)) {
-        this.$toast('手机号验证不通过！')
-        return
+        // return
       }
       const params = {
         CardNo: this.cardNo,
