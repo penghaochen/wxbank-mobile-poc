@@ -127,6 +127,7 @@ import 'swiper/css/swiper.css'
 import '@/utils/validate'
 import { getPhone } from '@/api/wxapi'
 import { strEnc } from '@/utils/des'
+import JSEncrypt from 'jsencrypt'
 export default {
   name: 'SwiperExamplePagination',
   title: 'Pagination',
@@ -190,10 +191,15 @@ export default {
       this.activeIndex = this.swiper.activeIndex
     },
     onSubmit() {
-      debugger
-      const cardNo = strEnc(this.cardNo, '1', '2', '3')
+      // rsa公钥
+      const pubKey = `-----BEGIN PUBLIC KEY-----MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDU/hbv04Efj5lDd6cTJFLuaHWXszy8kmnO0skAPeWp5CqgnNdzgUjD9sc6BLUWyb+NWLxO559z2bhhb2rWLDZ9MWMdX32w3FGiG3/2FAYubNBlNLv9pXPluj6QOj9TYWtMeb/RtCbDyNXFx0zeSV3vPyZ3kH7lJEIgERvie8bMWwIDAQAB-----END PUBLIC KEY-----`
+      const encryptStr = new JSEncrypt()
+      // 设置 加密公钥
+      encryptStr.setPublicKey(pubKey)
+      // 进行rsa加密
+      const cardNoEnc = encryptStr.encrypt(this.cardNo)
       const params = {
-        No: cardNo,
+        No: this.cardNo,
         phone: this.phone,
         code: this.code,
         checked1: this.checked1,

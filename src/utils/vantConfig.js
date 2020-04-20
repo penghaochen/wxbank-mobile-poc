@@ -20,15 +20,6 @@ Vue.use(RadioGroup)
 Vue.use(Checkbox)
 Vue.use(CheckboxGroup)
 Vue.use(Icon)
-// Vue.use(require('vant').Button)
-// Vue.use(require('vant').Cell)
-// Vue.use(require('vant').CellGroup)
-// Vue.use(require('vant').Col)
-// Vue.use(require('vant').Row)
-// Vue.use(require('vant').Form)
-// Vue.use(require('vant').Field)
-// Vue.use(require('vant').Tag)
-// Vue.use(require('vant').Pagination)
 
 // END
 

@@ -25,7 +25,7 @@
 </template>
 <script>
 import { getauthorize } from '@/api/wxapi'
-import { GetUrlParams } from '@/utils/index'
+import { GetUrlParams } from '@/utils/common'
 
 import { Grid, GridItem } from 'vant'
 export default {
