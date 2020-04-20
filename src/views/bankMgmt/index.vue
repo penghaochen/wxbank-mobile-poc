@@ -37,7 +37,7 @@ export default {
       }
       const that = this
       getPhone(data).then(res => {
-        that.sms = res.Content
+        that.sms = res.data.Content
         alert(JSON.stringify(res))
       }).catch(error => {
         alert(error)

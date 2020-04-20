@@ -10,7 +10,7 @@
       <van-form @submit="onSubmit" @failed="onFailed">
         <van-field
           v-model="cardNo"
-          :rules="validate.isBankCardNo"
+          :rules="validate.isBankCardNo.rule"
           type="digit"
           name="借记卡卡号"
           label="借记卡卡号"
@@ -20,7 +20,7 @@
         />
         <van-field
           v-model="phone"
-          :rules="validate.isPhoneNo"
+          :rules="validate.isPhoneNo.rule"
           type="tel"
           name="预留手机号"
           label="预留手机号"
@@ -30,7 +30,7 @@
         />
         <van-field
           v-model="code"
-          :rules="validate.isMessageNo"
+          :rules="validate.isMessageNo.rule"
           type="text"
           name="短信验证码"
           label="短信验证码"
@@ -62,7 +62,7 @@
       <van-form @submit="onSubmit">
         <van-field
           v-model="creCardNo"
-          :rules="validate.isBankCardNo"
+          :rules="validate.isBankCardNo.rule"
           type="digit"
           name="信用卡卡号"
           label="信用卡卡号"
@@ -82,7 +82,7 @@
         />
         <van-field
           v-model="crePhone"
-          :rules="validate.isPhoneNo"
+          :rules="validate.isPhoneNo.rule"
           type="tel"
           name="预留手机号"
           label="预留手机号"
@@ -92,7 +92,7 @@
         />
         <van-field
           v-model="creCode"
-          :rules="validate.isMessageNo"
+          :rules="validate.isMessageNo.rule"
           type="text"
           name="短信验证码"
           label="短信验证码"
@@ -125,7 +125,7 @@
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
 import '@/utils/validate'
-import { getPhone } from '@/api/wxapi'
+import { getMsgCode } from '@/api/wxapi'
 import { strEnc } from '@/utils/des'
 import JSEncrypt from 'jsencrypt'
 export default {
@@ -218,20 +218,34 @@ export default {
       this.$toast('验证不通过！')
     },
     getCode() {
+      debugger
       if (!this.counting) {
         this.$toast('验证码已发送！')
+      } else {
+        this.$toast('请稍后获取！')
+        return
       }
-      const data = {
-        Mobilephone: this.phone
+      if (!this.validate.isBankCardNo.pattern.test(this.cardNo)) {
+        this.$toast('卡号验证不通过！')
+        return
       }
-      const that = this
-      getPhone(data).then(res => {
-        that.code = res.Content
-        alert(JSON.stringify(res))
+      if (!this.validate.isPhoneNo.pattern.test(this.phone)) {
+        this.$toast('手机号验证不通过！')
+        return
+      }
+      const params = {
+        CardNo: this.cardNo,
+        BankAcType: '1',
+        Phone: this.phone
+      }
+      // const that = this
+      getMsgCode(params).then(res => {
+        debugger
+        alert(res)
+        this.counting = true
       }).catch(error => {
         alert(error)
       })
-      this.counting = true
     },
     countdownend() {
       this.counting = false
