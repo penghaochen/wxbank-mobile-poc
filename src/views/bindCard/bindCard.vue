@@ -138,7 +138,7 @@
 <script>
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper' // 轮播插件
 import 'swiper/css/swiper.css'// 轮播插件样式
-import { getMsgCode } from '@/api/wxapi'// 接口
+import { getMsgCode, bindCard } from '@/api/wxapi'// 接口
 import JSEncrypt from 'jsencrypt'// rsa加密
 import '@/utils/validate'// 验证规则
 
@@ -209,20 +209,28 @@ export default {
       encryptStr.setPublicKey(pubKey)
       // 进行rsa加密
       // const cardNoEnc = encryptStr.encrypt(this.cardNo)
+      const openId = sessionStorage.getItem('openId')
       const params = {
-        No: this.cardNo,
-        phone: this.phone,
-        code: this.code,
+        openid: openId || 'ertgft4545345',
+        CardNo: this.cardNo,
+        BankAcType: '1',
+        Phone: this.phone,
+        MsgVali: this.code,
         checked1: this.checked1,
         checked2: this.checked2,
         checked3: this.checked3
       }
       // 发送绑卡接口
-
-      // 跳转绑卡结果页
-      this.$router.push({
-        name: 'bindCardRes',
-        params: params
+      bindCard(params).then(res => {
+        alert(JSON.stringify(res))
+        params.No = this.cardNo
+        // 跳转绑卡结果页
+        this.$router.push({
+          name: 'bindCardRes',
+          params: params
+        })
+      }).catch(error => {
+        alert(error)
       })
     },
     /**

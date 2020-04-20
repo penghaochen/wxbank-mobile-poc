@@ -1,6 +1,6 @@
 <template>
   <div>
-    <van-field v-model="phone" label="手机号" />
+    <van-field v-model="phone" label="手机号" placeholder="请输入手机号" clearable/>
     <div style="margin: 16px;">
       <van-button round block type="danger" @click="getPhone">
         获取验证码

@@ -67,7 +67,15 @@ export function getPhone(params) {
 // 绑卡获取验证码功能
 export function getMsgCode(params) {
   return request({
-    url: '/GetMsgWithPhone.do',
+    url: '/getmsgwithphone',
+    method: 'post',
+    data: params
+  })
+}
+// 绑卡功能
+export function bindCard(params) {
+  return request({
+    url: '/pageactsign',
     method: 'post',
     data: params
   })
