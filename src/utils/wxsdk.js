@@ -1,4 +1,5 @@
-import wx from 'weixin-js-sdk'
+import wx from 'weixin-js-sdk' // 微信的jssdk
+
 export function shareApp() {
   // 微信分享配置
   wx.ready(function() {

@@ -203,7 +203,7 @@ export default {
      */
     onSubmit() {
       // rsa公钥
-      const pubKey = `-----BEGIN PUBLIC KEY-----MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDU/hbv04Efj5lDd6cTJFLuaHWXszy8kmnO0skAPeWp5CqgnNdzgUjD9sc6BLUWyb+NWLxO559z2bhhb2rWLDZ9MWMdX32w3FGiG3/2FAYubNBlNLv9pXPluj6QOj9TYWtMeb/RtCbDyNXFx0zeSV3vPyZ3kH7lJEIgERvie8bMWwIDAQAB-----END PUBLIC KEY-----`
+      const pubKey = `-----BEGIN PUBLIC KEY-----MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCIHShsTwbqF3k0r45nSH/8CSVPg+DWgwTAehHQxlqPBhnFD27mGz7fve/Unr5IrECDlQHQcl0kSi8n2U70woPfh5LC9BmdcI/+LhHwNfbBtR53zo/91EVsDPkghSggNpMhI3kWi1C0HVYs48rONajBl/E23BCY7ZBcs8JaX+9TgQIDAQAB-----END PUBLIC KEY-----`
       const encryptStr = new JSEncrypt()
       // 设置 加密公钥
       encryptStr.setPublicKey(pubKey)
@@ -272,23 +272,8 @@ export default {
     countdownend() {
       this.counting = false
     }
-  },
-  /**
-     * 离开此路由时触发 钩子函数
-     * @param to 跳转路由的属性
-     * @param from 当前路由的属性
-     * @param next 钩子函数
-     * @description 修改页面的meta值，false时再次进入页面会重新请求数据。
-     */
-  beforeRouteLeave(to, from, next) {
-    if (to.path === '/lobby') {
-      // 如果是首页菜单，则清除缓存
-      from.meta.keepAlive = false
-    } else {
-      from.meta.keepAlive = true
-    }
-    next()
   }
+
 }
 </script>
 

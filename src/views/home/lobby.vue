@@ -15,6 +15,7 @@ import { getauthorize } from '@/api/wxapi' // 授权接口
 import { GetUrlParams } from '@/utils/common' // 获取url后的参数方法
 
 import { Grid, GridItem } from 'vant'
+import JSEncrypt from 'jsencrypt'// rsa加密
 export default {
   name: 'Lobby',
   components: {
@@ -24,17 +25,22 @@ export default {
   },
   data() {
     return {
-      aaa: '1'
     }
   },
   mounted() {
-    debugger
     // 获取url中的code
     const code = GetUrlParams('code')
-    this.$toast('code:' + code)
-    if (!code) return
+    // rsa公钥
+    const pubKey = `-----BEGIN PUBLIC KEY-----MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCIHShsTwbqF3k0r45nSH/8CSVPg+DWgwTAehHQxlqPBhnFD27mGz7fve/Unr5IrECDlQHQcl0kSi8n2U70woPfh5LC9BmdcI/+LhHwNfbBtR53zo/91EVsDPkghSggNpMhI3kWi1C0HVYs48rONajBl/E23BCY7ZBcs8JaX+9TgQIDAQAB-----END PUBLIC KEY-----`
+    const encryptStr = new JSEncrypt()
+    // 设置 加密公钥
+    encryptStr.setPublicKey(pubKey)
+    // 进行rsa加密
+    const codeEnc = encryptStr.encrypt(code)
+    this.$toast('code:' + codeEnc)
+    if (!codeEnc) return
     const data = {
-      code: code
+      code: codeEnc
     }
     // 发送授权接口
     getauthorize(data).then(res => {
@@ -60,18 +66,8 @@ export default {
         name: id
       })
     }
-  },
-  /**
-     * 离开此路由时触发 钩子函数
-     * @param to 跳转路由的属性
-     * @param from 当前路由的属性
-     * @param next 钩子函数
-     * @description 修改页面的meta值，false时再次进入页面会重新请求数据。
-     */
-  beforeRouteLeave(to, from, next) {
-    to.meta.keepAlive = false
-    next()
   }
+
 }
 </script>
 <style lang="scss" scoped>

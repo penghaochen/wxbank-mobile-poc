@@ -5,8 +5,6 @@ import Router from 'vue-router'
 import home from './home'
 // 登录模块
 import login from './login'
-// 转账模块
-import transfer from './transfer'
 // 账户模块
 import account from './account'
 // 绑卡模块
@@ -17,7 +15,7 @@ import store from '@/store/index'
 Vue.use(Router)
 // 配置路由
 const RouterModel = new Router({
-  routes: [...home, ...login, ...transfer, ...account, ...bindCard, ...bankMgmt,
+  routes: [...home, ...login, ...account, ...bindCard, ...bankMgmt,
     {
       path: '*',
       redirect: {

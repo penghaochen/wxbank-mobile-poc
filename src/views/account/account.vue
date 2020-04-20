@@ -3,8 +3,8 @@
   <div>
     <!-- 卡信息 -->
     <div class="card-box">
-      <div class="card-title"><span><img src="@/assets/images/logo.png" style="width:30px;">华夏个人借记卡</span> <a class="btn" @click="AccountQry">查账</a></div>
-      <div class="card-center">{{ accInfo.ActNo ||'加载中...' }} <a class="btn" @click="AccountQry">定活互转</a></div>
+      <div class="card-title"><span><img src="@/assets/images/logo.png" style="width:30px;">华夏个人借记卡</span> <a class="btn" @click="onAccDetailClick">查账</a></div>
+      <div class="card-center">{{ accInfo.ActNo ||'加载中...' }} <a class="btn" @click="onTimToSavClick">定活互转</a></div>
       <div class="card-mark">开户行：{{ accInfo.AvailBalList[0].ActOpenBankBranch ||'加载中...' }}</div>
       <div class="card-tools">
         <div>{{ accInfo.AvailBalList[0].ActCurType ||'加载中...' }}</div>
@@ -26,7 +26,7 @@ export default {
       accInfo: { 'AvailBalList': [{}] } // 卡信息数据
     }
   },
-  activated() {
+  mounted() {
     // 从缓存中获取opennid
     const openId = sessionStorage.getItem('openId')
     alert('缓存的openId' + openId)

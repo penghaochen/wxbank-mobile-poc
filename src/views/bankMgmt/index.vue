@@ -12,9 +12,10 @@
   </div>
 </template>
 <script>
-import { getPhone } from '@/api/wxapi'
-import '@/utils/validate'
+import { getPhone } from '@/api/wxapi' // 获取短信验证码接口
 import { Grid, GridItem } from 'vant'
+import '@/utils/validate' // 验证规则
+
 export default {
   components: {
     [Grid.name]: Grid,
@@ -31,6 +32,10 @@ export default {
 
   },
   methods: {
+    /**
+     * 获取手机号短信验证码
+     * @description 获取该手机号获得的短信验证码
+     */
     getPhone() {
       if (!this.validate.isPhoneNo.pattern.test(this.phone)) {
         this.$toast('手机号验证不通过！')
