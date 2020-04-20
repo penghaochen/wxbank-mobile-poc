@@ -237,14 +237,10 @@ export default {
      * @description 获取短信验证码
      */
     getCode() {
-<<<<<<< HEAD
-      debugger
       var flag = this.validate.ruleCheck(this.cardNo, this.validate.isBankCardNo)
       if (!flag) {
         return
       }
-=======
->>>>>>> 5eb1ab5ac3ff3ffa21d6670f924e3a3ad1b05369
       if (!this.counting) {
         this.$toast('验证码已发送！')
       } else {
