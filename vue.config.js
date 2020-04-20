@@ -27,7 +27,8 @@ module.exports = {
       //   }
       // },
       '/pmobile/wcb/': {
-        target: 'http://192.168.230.248:8761', // 微信地址
+        // target: 'http://192.168.230.248:8761', // 微信地址
+        target: 'http://192.168.230.101:8761', // 曾地址
         changeOrigin: true,
         ws: true,
         pathRewrite: {

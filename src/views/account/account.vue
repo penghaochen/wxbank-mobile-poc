@@ -33,7 +33,7 @@ export default {
     }
     const that = this
     getAccount(data).then(res => {
-      that.accInfo = res
+      that.accInfo = res.data
     }).catch(error => {
       alert(JSON.stringify(error))
     })

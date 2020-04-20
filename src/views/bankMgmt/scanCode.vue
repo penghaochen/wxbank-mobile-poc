@@ -38,7 +38,7 @@ export default {
       const that = this
       getScanCode(data).then(res => {
         debugger
-        that.imgsrc = res.imgBase64
+        that.imgsrc = res.data.imgBase64
       }).catch(error => {
         alert(error)
       })

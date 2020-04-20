@@ -64,6 +64,14 @@ export function getPhone(params) {
     params: params
   })
 }
+// 绑卡获取验证码功能
+export function getMsgCode(params) {
+  return request({
+    url: '/GetMsgWithPhone.do',
+    method: 'post',
+    data: params
+  })
+}
 // 获取二维码
 export function getScanCode(params) {
   return request({
