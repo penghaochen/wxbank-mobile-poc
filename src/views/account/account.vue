@@ -1,6 +1,7 @@
 
 <template>
   <div>
+    <!-- 卡信息 -->
     <div class="card-box">
       <div class="card-title"><span><img src="@/assets/images/logo.png" style="width:30px;">华夏个人借记卡</span> <a class="btn" @click="AccountQry">查账</a></div>
       <div class="card-center">{{ accInfo.ActNo ||'加载中...' }} <a class="btn" @click="AccountQry">定活互转</a></div>
@@ -10,28 +11,30 @@
         <div>可用余额：{{ accInfo.AvailBalList[0].ActAvaiBal ||'加载中...' }}</div>
       </div>
     </div>
+    <!-- 积分 -->
     <van-cell-group>
       <van-cell :value="accInfo.AvailBalList[0].CifIntegral||'0'+'（北京分行）'" title="客户综合积分" />
     </van-cell-group>
   </div>
 </template>
 <script>
-import { getAccount } from '@/api/wxapi'
+import { getAccount } from '@/api/wxapi' // 获取卡信息接口
 export default {
+  name: 'Account',
   data() {
     return {
-      shopInfos: [],
-      isLoading: false,
-      accInfo: { 'AvailBalList': [{}] }
+      accInfo: { 'AvailBalList': [{}] } // 卡信息数据
     }
   },
   activated() {
+    // 从缓存中获取opennid
     const openId = sessionStorage.getItem('openId')
     alert('缓存的openId' + openId)
     const data = {
       openId: openId
     }
     const that = this
+    // 获取卡信息接口
     getAccount(data).then(res => {
       that.accInfo = res.data
     }).catch(error => {
@@ -39,7 +42,18 @@ export default {
     })
   },
   methods: {
-    AccountQry() {
+    /**
+     * 查账
+     * @description 账户详情
+     */
+    onAccDetailClick() {
+      this.$toast('该功能正在开发中')
+    },
+    /**
+     * 定活互转
+     * @description 定活互转
+     */
+    onTimToSavClick() {
       this.$toast('该功能正在开发中')
     }
   }
