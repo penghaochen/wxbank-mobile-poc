@@ -5,7 +5,7 @@
     <van-cell :value="paramsData.No" title="卡号" />
     <van-cell :value="0.00" title="账户余额" />
     <div style="margin: 16px;">
-      <van-button round block type="danger" class="btn" @click="qry">
+      <van-button round block type="danger" class="btn" @click="onAcctQryClick">
         账户查询
       </van-button>
       <van-button round block type="danger" class="btn">
@@ -31,15 +31,21 @@ export default {
     }
   },
   activated() {
+    // 获取router的params参数
     this.paramsData = this.$route.params
   },
   mounted() {
+    // 获取router的params参数
     this.paramsData = this.$route.params
-    console.log(this.paramsData)
   },
 
   methods: {
-    qry() {
+    /**
+     * 跳转账户查询按钮
+     * @description 跳转账户查询按钮
+     */
+    onAcctQryClick() {
+      // 返回回到绑卡录入页
       this.$router.replace({
         name: 'account'
       })
