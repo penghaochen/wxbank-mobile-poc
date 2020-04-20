@@ -13,7 +13,7 @@
 </template>
 <script>
 import { getPhone } from '@/api/wxapi'
-
+import '@/utils/validate'
 import { Grid, GridItem } from 'vant'
 export default {
   components: {
@@ -32,6 +32,10 @@ export default {
   },
   methods: {
     getPhone() {
+      if (!this.validate.isPhoneNo.pattern.test(this.phone)) {
+        this.$toast('手机号验证不通过！')
+        return
+      }
       const data = {
         Mobilephone: this.phone
       }
