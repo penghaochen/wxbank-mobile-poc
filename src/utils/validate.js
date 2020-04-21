@@ -5,19 +5,31 @@
  */
 import Vue from 'vue'
 import { Toast } from 'vant'
-export const idCard = /^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/
 
-export const mobileReg = /^1[0-9]{10}$/
+// export const idCard = /^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/
 
-export const address = val => {
-  const value = val.trim()
-  return value.length >= 5 && value.length <= 100
-}
+// export const mobileReg = /^1[0-9]{10}$/
 
-export const userName = /^[a-zA-Z0-9_\u4e00-\u9fa5]{3,20}$/
+// export const address = val => {
+//   const value = val.trim()
+//   return value.length >= 5 && value.length <= 100
+// }
 
-export const emailReg = /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/
+// export const userName = /^[a-zA-Z0-9_\u4e00-\u9fa5]{3,20}$/
 
+// export const emailReg = /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/
+
+// const numberPattern = /^[0-9]+$/ // 只有数字正则
+const cardNoPattern = /^([1-9]{1})(\d{15}|\d{18})$/ // 银行卡号正则
+const phoneNoPattern = /^1[3-9]\d{9}$/ // 手机号码正则
+const msgNoPattern = /^[0-9]{6}$/ // 短信验证码正则
+
+const cardNoRequiredMsg = '借记卡卡号不能为空！'
+const cardNoPatternMsg = '卡号必须为16或19位的数字！'
+const phoneNoRequiredMsg = '手机号码不能为空！'
+const phoneNoPatternMsg = '手机号码验证不通过！'
+const msgNoRequiredMsg = '短信验证码不能为空！'
+const msgNoPatternMsg = '短信验证码必须为6位数字！'
 /**
  * @param {string}{rule} 第一个是需要校验的参数，第二个是校验规则
  * @returns {Boolean}
@@ -27,7 +39,7 @@ export function ruleCheck(val, ruleStr) {
   console.log(Vue)
   let flag = true
   try {
-    ruleStr.rule.forEach(v => {
+    ruleStr.forEach(v => {
       debugger
       if (v.required === true) {
         if (!val) {
@@ -35,8 +47,8 @@ export function ruleCheck(val, ruleStr) {
           throw new Error('ending')
         }
       }
-      if (v.validator) {
-        if (!v.validator(val)) {
+      if (v.pattern) {
+        if (!v.pattern.test(val)) {
           Toast(v.message)
           throw new Error('ending')
         }
@@ -52,41 +64,28 @@ export function ruleCheck(val, ruleStr) {
 }
 
 /**
- * @param {string} cardNo 银行卡号验证
+ * @param {string} cardNo 银行卡号验证   CardNoPatternMsg CardNoRequiredMsg
  * @returns {Boolean}
  */
-export function isBankCardNo() {
-  const validator1 = (val) => {
-    return /^[0-9]+$/.test(val)
-  }
-  const validator2 = (val) => {
-    return /^([1-9]{1})(\d{15}|\d{18})$/.test(val)
-  }
-  return {
-    rule: [{ required: true, message: '借记卡卡号不能为空！' }, { validator: validator1, message: '卡号只能包含数字！' }, { validator: validator2, message: '卡号长度必须为16或19位！' }]
-  }
+export function isCardNo() {
+  const pattern = cardNoPattern
+  return [{ required: true, message: cardNoRequiredMsg }, { pattern, message: cardNoPatternMsg }]
 }
 /**
  * @param {string} phoneNo 手机号验证
  * @returns {Boolean}
  */
 export function isPhoneNo() {
-  const pattern = /^1[3-9]\d{9}$/
-  return {
-    pattern: pattern,
-    rule: [{ required: true, message: '请输入预留手机号！' }, { pattern, message: '手机号码号有误！' }]
-  }
+  const pattern = phoneNoPattern
+  return [{ required: true, message: phoneNoRequiredMsg }, { pattern, message: phoneNoPatternMsg }]
 }
 /**
- * @param {string} messageNo 短信验证码验证
+ * @param {string} msgNo 短信验证码验证
  * @returns {Boolean}
  */
-export function isMessageNo() {
-  const pattern = /(^[0-9]{4}$)|(^[0-9]{6}$)/
-  return {
-    pattern: pattern,
-    rule: [{ required: true, message: '请输入短信验证码！' }, { pattern, message: '验证码有误！' }]
-  }
+export function isMsgNo() {
+  const pattern = msgNoPattern
+  return [{ required: true, message: msgNoRequiredMsg }, { pattern, message: msgNoPatternMsg }]
 }
 
 /**
@@ -128,8 +127,8 @@ export function validatenull(val) {
 }
 
 Vue.prototype.validate = {
-  isBankCardNo: isBankCardNo(),
+  isCardNo: isCardNo(),
   isPhoneNo: isPhoneNo(),
-  isMessageNo: isMessageNo(),
+  isMsgNo: isMsgNo(),
   ruleCheck: ruleCheck
 }
