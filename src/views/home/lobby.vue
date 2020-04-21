@@ -40,12 +40,12 @@ export default {
     this.$toast('code:' + codeEnc)
     if (!codeEnc) return
     const data = {
-      code: codeEnc
+      code: code
     }
     // 发送授权接口
     getauthorize(data).then(res => {
       // openid存浏览器缓存
-      sessionStorage.setItem('openId', res.openId)
+      sessionStorage.setItem('openId', res.data.openId)
       alert(JSON.stringify(res))
     }).catch(error => {
       alert(error)

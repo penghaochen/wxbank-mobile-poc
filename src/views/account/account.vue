@@ -29,7 +29,7 @@ export default {
   mounted() {
     // 从缓存中获取opennid
     const openId = sessionStorage.getItem('openId')
-    alert('缓存的openId' + openId)
+    alert('缓存的openId：' + openId)
     const data = {
       openId: openId
     }
