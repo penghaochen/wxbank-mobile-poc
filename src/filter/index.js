@@ -9,7 +9,8 @@ export const yuan = value =>
 export const numberFormat = money => {
   if (money && money != null) {
     money = String(money)
-    var left = money.split('.')[0], right = money.split('.')[1]
+    const left = money.split('.')[0]
+    let right = money.split('.')[1]
     right = right ? (right.length >= 2 ? '.' + right.substr(0, 2) : '.' + right + '0') : '.00'
     var temp = left.split('').reverse().join('').match(/(\d{1,3})/g)
     return (Number(money) < 0 ? '-' : '') + temp.join(',').split('').reverse().join('') + right
