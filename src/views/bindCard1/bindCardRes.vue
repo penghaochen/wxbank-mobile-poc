@@ -24,7 +24,6 @@
 <script>
 
 export default {
-  name: 'BindCardRes',
   data() {
     return {
       paramsData: {}
@@ -38,8 +37,8 @@ export default {
   },
   mounted() {
     // 获取router的params参数
-    // this.paramsData = this.$route.params
     this.paramsData = this.$store.state.params
+    // this.paramsData = this.$route.params
   },
 
   methods: {
@@ -50,7 +49,7 @@ export default {
     onAcctQryClick() {
       // 返回回到绑卡录入页
       this.$router.replace({
-        name: 'Account'
+        name: 'account'
       })
     }
   }

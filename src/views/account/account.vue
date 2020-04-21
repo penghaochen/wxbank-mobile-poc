@@ -13,12 +13,12 @@
     </div>
     <!-- 积分 -->
     <van-cell-group>
-      <van-cell :value="accInfo.AvailBalList[0].CifIntegral||'0'+'（北京分行）'" title="客户综合积分" />
+      <van-cell :value="(accInfo.AvailBalList[0].CifIntegral||'0')+'（北京分行）'" title="客户综合积分" />
     </van-cell-group>
   </div>
 </template>
 <script>
-import { getAccount } from '@/api/wxapi' // 获取卡信息接口
+import { getAccount } from '@/api/wxApi' // 获取卡信息接口
 export default {
   name: 'Account',
   data() {

@@ -23,12 +23,10 @@ export const emailReg = /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/
  * @returns {Boolean}
  */
 export function ruleCheck(val, ruleStr) {
-  debugger
   console.log(Vue)
   let flag = true
   try {
     ruleStr.rule.forEach(v => {
-      debugger
       if (v.required === true) {
         if (!val) {
           Toast(v.message)

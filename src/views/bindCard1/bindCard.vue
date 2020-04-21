@@ -7,6 +7,9 @@
       <!-- <swiper-slide><img src="@/assets/images/card2.jpg" class="img"></swiper-slide> -->
       <div slot="pagination" class="swiper-pagination"/>
     </swiper>
+    <van-button round block type="danger" @click="onSubmit">
+      绑定
+    </van-button>
     <!-- 滑至第一张图 显示以下内容 -->
     <div v-show="activeIndex==0">
       <van-form @submit="onSubmit" @failed="onFailed">
@@ -136,17 +139,17 @@
 </template>
 
 <script>
-import { Dialog } from 'vant'
+// import { Dialog } from 'vant'
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper' // 轮播插件
 import 'swiper/css/swiper.css'// 轮播插件样式
-import { getMsgCode, bindCard } from '@/api/wxApi'// 接口
+import { getMsgCode } from '@/api/wxApi'// 接口
 // import JSEncrypt from 'jsencrypt'// rsa加密
 import '@/utils/validate'// 验证规则
 
 // import { strEnc } from '@/utils/des'
 
 export default {
-  name: 'BindCard',
+  name: 'BindCard1',
   components: {
     Swiper,
     SwiperSlide
@@ -203,40 +206,34 @@ export default {
      * @description 借记卡绑卡事件
      */
     onSubmit() {
-      // rsa公钥
-      // const pubKey = `-----BEGIN PUBLIC KEY-----MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCIHShsTwbqF3k0r45nSH/8CSVPg+DWgwTAehHQxlqPBhnFD27mGz7fve/Unr5IrECDlQHQcl0kSi8n2U70woPfh5LC9BmdcI/+LhHwNfbBtR53zo/91EVsDPkghSggNpMhI3kWi1C0HVYs48rONajBl/E23BCY7ZBcs8JaX+9TgQIDAQAB-----END PUBLIC KEY-----`
-      // const encryptStr = new JSEncrypt()
-      // // 设置 加密公钥
-      // encryptStr.setPublicKey(pubKey)
-      // 进行rsa加密
-      // const cardNoEnc = encryptStr.encrypt(this.cardNo)
-      const openId = sessionStorage.getItem('openId')
-      const params = {
-        openid: openId || 'ertgft4545345',
-        CardNo: this.cardNo,
-        BankAcType: '1',
-        Phone: this.phone,
-        MsgVali: this.code,
-        checked1: this.checked1,
-        checked2: this.checked2,
-        checked3: this.checked3
-      }
-      // 发送绑卡接口
-      const that = this
-      bindCard(params).then(res => {
-        Dialog.alert({
-          title: '提示',
-          message: res.message
-        }).then(() => {
-          params.No = that.cardNo
-          params.Balance = res.data.Balance
-          // 跳转绑卡结果页
-          this.$store.state.params = params
-          that.$router.push(('/bindCardRes'))
-        })
-      }).catch(error => {
-        console.log(error)
-      })
+      // const openId = sessionStorage.getItem('openId')
+      // const params = {
+      //   openid: openId || 'ertgft4545345',
+      //   CardNo: this.cardNo,
+      //   BankAcType: '1',
+      //   Phone: this.phone,
+      //   MsgVali: this.code,
+      //   checked1: this.checked1,
+      //   checked2: this.checked2,
+      //   checked3: this.checked3
+      // }
+      // const that = this
+      // Dialog.alert({
+      //   title: '提示',
+      //   message: '11111'
+      // }).then(() => {
+      //   // params.No = that.cardNo
+      //   // params.Balance = '1111'
+      //   // 跳转绑卡结果页
+      //   that.$router.push({
+      //     name: 'BindCardRes',
+      //     params: {}
+      //   })
+      // })
+      this.$store.state.params = { No: '111111', Balance: '2333' }
+      this.$router.push('/bindCardRes1')
+      this.$forceUpdate()
+      return
     },
     /**
      * 表单验证错误处理事件

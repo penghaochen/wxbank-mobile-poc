@@ -2,7 +2,7 @@
 export default [
   {
     path: '/lobby',
-    name: 'lobby',
+    name: 'Lobby',
     components: {
       default: () => import('@/views/home/lobby')
     },
