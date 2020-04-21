@@ -13,8 +13,8 @@
         <!-- 输入卡号 -->
         <van-field
           v-model="cardNo"
-          :rules="validate.isBankCardNo.rule"
-          type="text"
+          :rules="validate.isCardNo"
+          type="digit"
           name="借记卡卡号"
           label="借记卡卡号"
           placeholder="请输入借记卡卡号"
@@ -24,7 +24,7 @@
         <!-- 输入手机号 -->
         <van-field
           v-model="phone"
-          :rules="validate.isPhoneNo.rule"
+          :rules="validate.isPhoneNo"
           type="tel"
           name="预留手机号"
           label="预留手机号"
@@ -35,7 +35,7 @@
         <!-- 输入短信验证码 -->
         <van-field
           v-model="code"
-          :rules="validate.isMessageNo.rule"
+          :rules="validate.isMsgNo"
           type="text"
           name="短信验证码"
           label="短信验证码"
@@ -71,7 +71,7 @@
         <!-- 输入信用卡卡号 -->
         <van-field
           v-model="creCardNo"
-          :rules="validate.isBankCardNo.rule"
+          :rules="validate.isCardNo"
           type="digit"
           name="信用卡卡号"
           label="信用卡卡号"
@@ -93,7 +93,7 @@
         <!-- 输入预留手机号 -->
         <van-field
           v-model="crePhone"
-          :rules="validate.isPhoneNo.rule"
+          :rules="validate.isPhoneNo"
           type="tel"
           name="预留手机号"
           label="预留手机号"
@@ -104,7 +104,7 @@
         <!-- 输入短信验证码 -->
         <van-field
           v-model="creCode"
-          :rules="validate.isMessageNo.rule"
+          :rules="validate.isMsgNo"
           type="text"
           name="短信验证码"
           label="短信验证码"
@@ -243,36 +243,47 @@ export default {
      * @description 表单验证不通过事件
      */
     onFailed() {
-      this.$toast('验证不通过！')
+      // 表单验证
+      var flag = this.validate.ruleCheck(this.cardNo, this.validate.isCardNo)
+      if (!flag) {
+        return
+      }
+      var flag1 = this.validate.ruleCheck(this.phone, this.validate.isPhoneNo)
+      if (!flag1) {
+        return
+      }
+      var flag2 = this.validate.ruleCheck(this.code, this.validate.isMsgNo)
+      if (!flag2) {
+        return
+      }
     },
     /**
      * 获取短信验证码
      * @description 获取短信验证码
      */
     getCode() {
-      var flag = this.validate.ruleCheck(this.cardNo, this.validate.isBankCardNo)
+      var flag = this.validate.ruleCheck(this.cardNo, this.validate.isCardNo)
       if (!flag) {
         return
       }
+      var flag1 = this.validate.ruleCheck(this.phone, this.validate.isPhoneNo)
+      if (!flag1) {
+        return
+      }
       if (!this.counting) {
-        this.$toast('验证码已发送！')
+        const params = {
+          CardNo: this.cardNo,
+          BankAcType: '1',
+          Phone: this.phone
+        }
+        getMsgCode(params).then(res => {
+          this.$toast(res.message)
+          this.counting = true
+        })
       } else {
         this.$toast('请稍后获取！')
-        // return
+        return
       }
-      const params = {
-        CardNo: this.cardNo,
-        BankAcType: '1',
-        Phone: this.phone
-      }
-      // 获取短信验证码接口
-      // const that = this
-      getMsgCode(params).then(res => {
-        alert(JSON.stringify(res))
-        this.counting = true
-      }).catch(error => {
-        console.log(error)
-      })
     },
     /**
      * 倒计时结束事件

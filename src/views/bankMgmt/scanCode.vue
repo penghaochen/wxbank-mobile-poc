@@ -1,14 +1,25 @@
 <template>
   <div>
-    <van-field v-model="phone" label="手机号" placeholder="请输入手机号" clearable/>
-    <div style="margin: 16px;">
-      <van-button round block type="danger" @click="getCode">
-        获取回单二维码
-      </van-button>
-    </div>
-    <van-cell-group>
-      <img :src="'data:image/png;base64,'+imgsrc" style="width:80%;margin-left: 10%;">
-    </van-cell-group>
+    <van-form @submit="onSubmit" @failed="onFailed">
+      <van-field
+        v-model="phone"
+        :rules="validate.isPhoneNo"
+        type="tel"
+        name="手机号码"
+        label="手机号码"
+        placeholder="请输入手机号码"
+        clearable
+        required
+      />
+      <div style="margin: 16px;">
+        <van-button round block type="danger" native-type="submit">
+          获取回单二维码
+        </van-button>
+      </div>
+      <van-cell-group>
+        <img :src="'data:image/png;base64,'+imgsrc" style="width:80%;margin-left: 10%;">
+      </van-cell-group>
+    </van-form>
   </div>
 </template>
 <script>
@@ -36,11 +47,7 @@ export default {
      * 获取回单二维码
      * @description 获取回单二维码
      */
-    getCode() {
-      if (!this.validate.isPhoneNo.pattern.test(this.phone)) {
-        this.$toast('手机号验证不通过！')
-        return
-      }
+    onSubmit() {
       const data = {
         Mobilephone: this.phone
       }
@@ -51,6 +58,17 @@ export default {
         // alert(JSON.stringify(error))
         console.log(error)
       })
+    },
+    /**
+     * 表单验证错误处理事件
+     * @description 表单验证不通过事件
+     */
+    onFailed() {
+      // 表单验证
+      var flag1 = this.validate.ruleCheck(this.phone, this.validate.isPhoneNo)
+      if (!flag1) {
+        return
+      }
     }
   }
 }
