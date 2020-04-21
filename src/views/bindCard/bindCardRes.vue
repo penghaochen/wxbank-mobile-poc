@@ -3,7 +3,7 @@
     <van-icon class="icon-success" color="#a00" name="success" size="3rem"/>
     <div class="suc-box">绑定成功</div>
     <van-cell :value="paramsData.No" title="卡号" />
-    <van-cell :value="paramsData.Balance" title="账户余额" />
+    <van-cell :value="paramsData.Balance|numberFormat" title="账户余额" />
     <div style="margin: 16px;">
       <van-button round block type="danger" class="btn" @click="onAcctQryClick">
         账户查询

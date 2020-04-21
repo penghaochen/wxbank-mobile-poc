@@ -8,7 +8,7 @@
       <div class="card-mark">开户行：{{ accInfo.AvailBalList[0].ActOpenBankBranch ||'加载中...' }}</div>
       <div class="card-tools">
         <div>{{ accInfo.AvailBalList[0].ActCurType ||'加载中...' }}</div>
-        <div>可用余额：{{ accInfo.AvailBalList[0].ActAvaiBal ||'加载中...' }}</div>
+        <div>可用余额：{{ (accInfo.AvailBalList[0].ActAvaiBal|numberFormat) ||'加载中...' }}</div>
       </div>
     </div>
     <!-- 积分 -->
