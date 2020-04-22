@@ -11,6 +11,7 @@
         <div>可用余额：{{ accInfo.AvailBalList[0].ActAvaiBal ||'加载中...' }}</div>
       </div>
     </div>
+    {{ '1233333333223423'|accNoEncFilter }}
     <!-- 积分 -->
     <van-cell-group>
       <van-cell :value="accInfo.AvailBalList[0].CifIntegral||'0'+'（北京分行）'" title="客户综合积分" />
