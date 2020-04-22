@@ -139,7 +139,7 @@
 import { Dialog } from 'vant'
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper' // 轮播插件
 import 'swiper/css/swiper.css'// 轮播插件样式
-import { getMsgCode, bindCard } from '@/api/wxApi'// 接口
+import { getMsgCode, bindCard } from '@/api/wxpocApi'// 接口
 // import JSEncrypt from 'jsencrypt'// rsa加密
 import '@/utils/validate'// 验证规则
 

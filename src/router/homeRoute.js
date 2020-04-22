@@ -1,5 +1,6 @@
 
 export default [
+  // 菜单页
   {
     path: '/lobby',
     name: 'Lobby',

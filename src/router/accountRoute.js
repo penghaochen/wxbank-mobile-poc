@@ -1,5 +1,6 @@
 
 export default [
+  // 我的账户
   {
     path: '/account',
     name: 'Account',
@@ -12,6 +13,7 @@ export default [
       keepAlive: true
     }
   },
+  // 账户详情
   {
     path: '/accountDetail',
     name: 'AccountDetail',

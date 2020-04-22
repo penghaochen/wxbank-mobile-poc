@@ -3,16 +3,15 @@
     <!-- 菜单 -->
     <van-grid>
       <van-grid-item icon="photo-o" text="绑卡" @click="gotoMenu('BindCard')"/>
-      <van-grid-item icon="photo-o" text="绑卡测试" @click="gotoMenu('BindCard1')"/>
       <van-grid-item icon="photo-o" text="我的账户" @click="gotoMenu('Account')"/>
-      <van-grid-item icon="photo-o" text="获取短信" @click="gotoMenu('BankMgmt')"/>
+      <van-grid-item icon="photo-o" text="获取短信" @click="gotoMenu('SmsCode')"/>
       <van-grid-item icon="photo-o" text="生成二维码" @click="gotoMenu('ScanCode')"/>
       <van-grid-item icon="photo-o" text="更多功能" @click="gotoMenu()"/>
     </van-grid>
   </div>
 </template>
 <script>
-import { getauthorize } from '@/api/wxApi' // 授权接口
+import { getauthorize } from '@/api/wxpocApi' // 授权接口
 import { GetUrlParams } from '@/utils/common' // 获取url后的参数方法
 
 import { Grid, GridItem } from 'vant'

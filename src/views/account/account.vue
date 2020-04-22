@@ -18,7 +18,7 @@
   </div>
 </template>
 <script>
-import { getAccount } from '@/api/wxApi' // 获取卡信息接口
+import { getAccount } from '@/api/wxpocApi' // 获取卡信息接口
 export default {
   name: 'Account',
   data() {

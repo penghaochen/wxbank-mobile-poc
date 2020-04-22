@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import App from './App.vue'
 import store from './store' // 缓存数据
-import router from './router'
+import router from './router/router.config' // 路由配置
 
 import filters from '@/filter' // 公共过滤器
-import mixin from '@/mixin/router' // 路由拦截器配置
+import mixin from '@/mixin/routerMixin' // 路由拦截器配置
 import '@/assets/scss/global.scss' // 公共样式
 import '@/assets/scss/iconfont/iconfont.css' // 设置矢量图
 import 'vant/lib/icon/local.css' // 使用vant ui框架

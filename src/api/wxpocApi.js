@@ -4,33 +4,7 @@
  */
 import request from '@/utils/request'
 
-export function getConfig(url, params) {
-  return request({
-    url: '/api/jssdk/config',
-    method: 'post',
-    data: {
-      api: params,
-      url
-    }
-  })
-}
-// 获取收款人列表
-export function getAccountList(data) {
-  return request({
-    url: 'QueryAccountList.do',
-    method: 'get',
-    params: data
-  })
-}
-// 转账
-export function transfer(data) {
-  return request({
-    url: 'Transfer.do',
-    method: 'get',
-    params: data
-  })
-}
-// 配置菜单
+// 获取菜单
 export function getMenu(params) {
   return request({
     url: '/wx/cgi-bin/get_current_selfmenu_info',
@@ -38,6 +12,7 @@ export function getMenu(params) {
     params: params
   })
 }
+// 配置菜单
 export function setMenu(params) {
   return request({
     url: '/wx/cgi-bin/menu/create?access_token=32_wAWjK_3E_5255nHwfDgZ7EzNVronah1IXPWYxzY8-fSMk1wMLKAsMlxfGzHK6C8dIRYRu04xyzYXgJGsefVkyR1w2KPCTBZH9sTC8atZMVxWI_P5z-Yi3pRYpSD4ByS47u9QTBxy9tIFxp5uLQTdAGAXCF',
@@ -45,6 +20,7 @@ export function setMenu(params) {
     data: params
   })
 }
+// 删除菜单
 export function delMenu(params) {
   return request({
     url: '/wx/cgi-bin/menu/delete',
@@ -52,7 +28,7 @@ export function delMenu(params) {
     params: params
   })
 }
-// 授权
+// 授权code获取accesstoken和openid
 export function getauthorize(params) {
   return request({
     url: '/auth',
@@ -60,7 +36,7 @@ export function getauthorize(params) {
     data: params
   })
 }
-// 获取短信
+// 获取短信验证码（后管）
 export function getPhone(params) {
   return request({
     url: '/QuerySMSMsg.do',

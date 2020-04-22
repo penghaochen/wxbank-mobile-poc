@@ -1,3 +1,7 @@
+/**
+ * @description 账户管理所有接口
+ * @author
+ */
 import request from '@/utils/request'
 
 // 获取卡信息

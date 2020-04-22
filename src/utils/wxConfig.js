@@ -1,6 +1,6 @@
 import wx from 'weixin-js-sdk'
 import router from '@/router'
-import { getConfig } from '@/api/wxApi'
+import { getConfig } from '@/api/wxpocApi'
 const actions = ['openLocation', 'getLocation', 'updateAppMessageShareData', 'updateTimelineShareData', 'chooseImage', 'uploadImage', 'previewImage', 'getLocalImgData', 'downloadImage', 'closeWindow', 'hideMenuItems', 'scanQRCode', '', '', 'showMenuItems', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareTimeline', 'chooseWXPay']
 
 router.afterEach(async(to) => {

@@ -1,6 +1,5 @@
 
 export default {
-
   /**
      * 离开此路由时触发 钩子函数
      * @param to 跳转路由的属性

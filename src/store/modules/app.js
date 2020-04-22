@@ -3,8 +3,8 @@
  */
 
 const state = {
-  show: false,
-  rightText: ''
+  show: false, // 遮罩标识
+  rightText: ''// 标题右侧文字
 }
 
 const mutations = {

@@ -23,7 +23,7 @@
   </div>
 </template>
 <script>
-import { getScanCode } from '@/api/wxApi' // 获取回单二维码图片接口
+import { getScanCode } from '@/api/wxpocApi' // 获取回单二维码图片接口
 import '@/utils/validate' // 验证规则
 import { Grid, GridItem } from 'vant'
 export default {

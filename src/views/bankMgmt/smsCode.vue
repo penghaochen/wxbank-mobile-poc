@@ -23,12 +23,12 @@
   </div>
 </template>
 <script>
-import { getPhone } from '@/api/wxApi' // 获取短信验证码接口
+import { getPhone } from '@/api/wxpocApi' // 获取短信验证码接口
 import { Grid, GridItem } from 'vant'
 import '@/utils/validate' // 验证规则
 
 export default {
-  name: 'BankMgmt',
+  name: 'SmsCode',
   components: {
     [Grid.name]: Grid,
     [GridItem.name]: GridItem
