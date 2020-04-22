@@ -3,8 +3,6 @@ import Router from 'vue-router'
 // import { getStore } from '@/utils/store'
 // 首页模块
 import home from './home'
-// 登录模块
-import login from './login'
 // 账户模块
 import account from './account'
 // 绑卡模块
@@ -15,11 +13,11 @@ import store from '@/store/index'
 Vue.use(Router)
 // 配置路由
 const RouterModel = new Router({
-  routes: [...home, ...login, ...account, ...bindCard, ...bankMgmt,
+  routes: [...home, ...account, ...bindCard, ...bankMgmt,
     {
       path: '*',
       redirect: {
-        name: 'lobby'
+        name: 'Lobby'
       }
     }]
 })

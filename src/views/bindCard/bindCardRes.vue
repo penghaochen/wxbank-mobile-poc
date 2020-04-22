@@ -3,7 +3,7 @@
     <van-icon class="icon-success" color="#a00" name="success" size="3rem"/>
     <div class="suc-box">绑定成功</div>
     <van-cell :value="paramsData.No" title="卡号" />
-    <van-cell :value="0.00" title="账户余额" />
+    <van-cell :value="paramsData.Balance|numberFormat" title="账户余额" />
     <div style="margin: 16px;">
       <van-button round block type="danger" class="btn" @click="onAcctQryClick">
         账户查询
@@ -24,6 +24,7 @@
 <script>
 
 export default {
+  name: 'BindCardRes',
   data() {
     return {
       paramsData: {}
@@ -32,11 +33,13 @@ export default {
   },
   activated() {
     // 获取router的params参数
-    this.paramsData = this.$route.params
+    // this.paramsData = this.$route.params
+    this.paramsData = this.$store.state.params
   },
   mounted() {
     // 获取router的params参数
-    this.paramsData = this.$route.params
+    // this.paramsData = this.$route.params
+    this.paramsData = this.$store.state.params
   },
 
   methods: {
@@ -47,7 +50,7 @@ export default {
     onAcctQryClick() {
       // 返回回到绑卡录入页
       this.$router.replace({
-        name: 'account'
+        name: 'Account'
       })
     }
   }

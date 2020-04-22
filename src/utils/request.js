@@ -40,7 +40,7 @@ service.interceptors.response.use(
         title: '警告',
         message: res.message
       })
-      return res
+      return Promise.reject(res)
     }
   }, error => {
     console.log('err' + error)// for debug

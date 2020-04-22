@@ -8,18 +8,18 @@
       <div class="card-mark">开户行：{{ accInfo.AvailBalList[0].ActOpenBankBranch ||'加载中...' }}</div>
       <div class="card-tools">
         <div>{{ accInfo.AvailBalList[0].ActCurType ||'加载中...' }}</div>
-        <div>可用余额：{{ accInfo.AvailBalList[0].ActAvaiBal ||'加载中...' }}</div>
+        <div>可用余额：{{ (accInfo.AvailBalList[0].ActAvaiBal|numberFormat) ||'加载中...' }}</div>
       </div>
     </div>
     {{ '1233333333223423'|accNoEncFilter }}
     <!-- 积分 -->
     <van-cell-group>
-      <van-cell :value="accInfo.AvailBalList[0].CifIntegral||'0'+'（北京分行）'" title="客户综合积分" />
+      <van-cell :value="(accInfo.AvailBalList[0].CifIntegral||'0')+'（北京分行）'" title="客户综合积分" />
     </van-cell-group>
   </div>
 </template>
 <script>
-import { getAccount } from '@/api/wxapi' // 获取卡信息接口
+import { getAccount } from '@/api/wxApi' // 获取卡信息接口
 export default {
   name: 'Account',
   data() {

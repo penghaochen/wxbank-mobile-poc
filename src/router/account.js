@@ -2,7 +2,7 @@
 export default [
   {
     path: '/account',
-    name: 'account',
+    name: 'Account',
     components: {
       default: () => import('@/views/account/account')
 
@@ -14,7 +14,7 @@ export default [
   },
   {
     path: '/accountDetail',
-    name: 'accountDetail',
+    name: 'AccountDetail',
     components: {
       default: () => import('@/views/account/accountDetail')
 

@@ -23,11 +23,12 @@
   </div>
 </template>
 <script>
-import { getPhone } from '@/api/wxapi' // 获取短信验证码接口
+import { getPhone } from '@/api/wxApi' // 获取短信验证码接口
 import { Grid, GridItem } from 'vant'
 import '@/utils/validate' // 验证规则
 
 export default {
+  name: 'BankMgmt',
   components: {
     [Grid.name]: Grid,
     [GridItem.name]: GridItem
@@ -54,7 +55,7 @@ export default {
       const that = this
       getPhone(data).then(res => {
         that.sms = res.data.Content
-        alert(JSON.stringify(res))
+        // alert(JSON.stringify(res))
       }).catch(error => {
         alert(error)
       })

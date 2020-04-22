@@ -136,10 +136,11 @@
 </template>
 
 <script>
+import { Dialog } from 'vant'
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper' // 轮播插件
 import 'swiper/css/swiper.css'// 轮播插件样式
-import { getMsgCode, bindCard } from '@/api/wxapi'// 接口
-import JSEncrypt from 'jsencrypt'// rsa加密
+import { getMsgCode, bindCard } from '@/api/wxApi'// 接口
+// import JSEncrypt from 'jsencrypt'// rsa加密
 import '@/utils/validate'// 验证规则
 
 // import { strEnc } from '@/utils/des'
@@ -203,10 +204,10 @@ export default {
      */
     onSubmit() {
       // rsa公钥
-      const pubKey = `-----BEGIN PUBLIC KEY-----MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCIHShsTwbqF3k0r45nSH/8CSVPg+DWgwTAehHQxlqPBhnFD27mGz7fve/Unr5IrECDlQHQcl0kSi8n2U70woPfh5LC9BmdcI/+LhHwNfbBtR53zo/91EVsDPkghSggNpMhI3kWi1C0HVYs48rONajBl/E23BCY7ZBcs8JaX+9TgQIDAQAB-----END PUBLIC KEY-----`
-      const encryptStr = new JSEncrypt()
-      // 设置 加密公钥
-      encryptStr.setPublicKey(pubKey)
+      // const pubKey = `-----BEGIN PUBLIC KEY-----MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCIHShsTwbqF3k0r45nSH/8CSVPg+DWgwTAehHQxlqPBhnFD27mGz7fve/Unr5IrECDlQHQcl0kSi8n2U70woPfh5LC9BmdcI/+LhHwNfbBtR53zo/91EVsDPkghSggNpMhI3kWi1C0HVYs48rONajBl/E23BCY7ZBcs8JaX+9TgQIDAQAB-----END PUBLIC KEY-----`
+      // const encryptStr = new JSEncrypt()
+      // // 设置 加密公钥
+      // encryptStr.setPublicKey(pubKey)
       // 进行rsa加密
       // const cardNoEnc = encryptStr.encrypt(this.cardNo)
       const openId = sessionStorage.getItem('openId')
@@ -221,16 +222,20 @@ export default {
         checked3: this.checked3
       }
       // 发送绑卡接口
+      const that = this
       bindCard(params).then(res => {
-        alert(JSON.stringify(res))
-        params.No = this.cardNo
-        // 跳转绑卡结果页
-        this.$router.push({
-          name: 'bindCardRes',
-          params: params
+        Dialog.alert({
+          title: '提示',
+          message: res.message
+        }).then(() => {
+          params.No = that.cardNo
+          params.Balance = res.data.Balance
+          // 跳转绑卡结果页
+          this.$store.state.params = params
+          that.$router.push(('/bindCardRes'))
         })
       }).catch(error => {
-        alert(error)
+        console.log(error)
       })
     },
     /**

@@ -23,10 +23,11 @@
   </div>
 </template>
 <script>
-import { getScanCode } from '@/api/wxapi' // 获取回单二维码图片接口
+import { getScanCode } from '@/api/wxApi' // 获取回单二维码图片接口
 import '@/utils/validate' // 验证规则
 import { Grid, GridItem } from 'vant'
 export default {
+  name: 'ScanCode',
   components: {
     [Grid.name]: Grid,
     [GridItem.name]: GridItem
@@ -54,7 +55,8 @@ export default {
       getScanCode(data).then(res => {
         that.imgsrc = res.data.imgBase64
       }).catch(error => {
-        alert(error)
+        // alert(JSON.stringify(error))
+        console.log(error)
       })
     },
     /**

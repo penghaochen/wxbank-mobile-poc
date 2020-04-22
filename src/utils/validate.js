@@ -35,12 +35,10 @@ const msgNoPatternMsg = '短信验证码必须为6位数字！'
  * @returns {Boolean}
  */
 export function ruleCheck(val, ruleStr) {
-  debugger
   console.log(Vue)
   let flag = true
   try {
     ruleStr.forEach(v => {
-      debugger
       if (v.required === true) {
         if (!val) {
           Toast(v.message)

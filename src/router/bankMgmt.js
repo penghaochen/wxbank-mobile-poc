@@ -1,7 +1,7 @@
 export default [
   {
     path: '/bankMgmt',
-    name: 'bankMgmt',
+    name: 'BankMgmt',
     components: {
       default: () => import('@/views/bankMgmt/index')
     },
@@ -11,7 +11,7 @@ export default [
   },
   {
     path: '/scanCode',
-    name: 'scanCode',
+    name: 'ScanCode',
     components: {
       default: () => import('@/views/bankMgmt/scanCode')
     },

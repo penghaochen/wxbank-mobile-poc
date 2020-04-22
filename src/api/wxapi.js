@@ -1,3 +1,7 @@
+/**
+ * @description 微信poc所有接口
+ * @author digua
+ */
 import request from '@/utils/request'
 
 export function getConfig(url, params) {
@@ -67,7 +71,7 @@ export function getPhone(params) {
 // 绑卡获取验证码功能
 export function getMsgCode(params) {
   return request({
-    url: '/getmsgwithphone',
+    url: '/binding/getmsgwithphone',
     method: 'post',
     data: params
   })
@@ -75,7 +79,7 @@ export function getMsgCode(params) {
 // 绑卡功能
 export function bindCard(params) {
   return request({
-    url: '/pageactsign',
+    url: '/binding/pageactsign',
     method: 'post',
     data: params
   })
@@ -97,10 +101,3 @@ export function getAccount(params) {
   })
 }
 
-export function getAccount1(params) {
-  return request({
-    url: '/myaccount',
-    method: 'post',
-    data: params
-  })
-}

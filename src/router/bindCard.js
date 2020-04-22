@@ -2,7 +2,7 @@
 export default [
   {
     path: '/bindCard',
-    name: 'bindCard',
+    name: 'BindCard',
     components: {
       default: () => import('@/views/bindCard/bindCard')
 
@@ -14,7 +14,7 @@ export default [
   },
   {
     path: '/bindCardRes',
-    name: 'bindCardRes',
+    name: 'BindCardRes',
     components: {
       default: () => import('@/views/bindCard/bindCardRes')
 

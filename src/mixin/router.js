@@ -1,18 +1,6 @@
 
 export default {
-  data() {
-    return {
 
-    }
-  },
-
-  mounted() {
-
-  },
-
-  activated() {
-
-  },
   /**
      * 离开此路由时触发 钩子函数
      * @param to 跳转路由的属性
@@ -21,7 +9,6 @@ export default {
      * @description 修改页面的meta值，false时再次进入页面会重新请求数据。
      */
   beforeRouteLeave(to, from, next) {
-    debugger
     if (from.path === '/lobby') {
       to.meta.keepAlive = false
       next()
