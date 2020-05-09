@@ -5,6 +5,7 @@
  */
 import Vue from 'vue'
 import { Toast } from 'vant'
+import { getAllPattern } from '@/api/backMgmtApi'// 接口
 
 // export const idCard = /^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/
 
@@ -19,11 +20,22 @@ import { Toast } from 'vant'
 
 // export const emailReg = /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/
 
+// 添加变量属性
+function add(name, value) {
+  const obj = { }
+  obj[name] = value// 返回参数
+  console.log(JSON.stringify(obj))
+  Object.assign(Vue.prototype.validate, obj)
+  return
+}
 // const numberPattern = /^[0-9]+$/ // 只有数字正则
+const clientNoPattern = /^[0-9]+$/ // 客户号数字正则
 const cardNoPattern = /^([1-9]{1})(\d{15}|\d{18})$/ // 银行卡号正则
 const phoneNoPattern = /^1[3-9]\d{9}$/ // 手机号码正则
 const msgNoPattern = /^[0-9]{6}$/ // 短信验证码正则
 
+const clientNoRequiredMsg = '客户号不能为空！'
+const clientNoPatternMsg = '客户号必须为数字！'
 const cardNoRequiredMsg = '借记卡卡号不能为空！'
 const cardNoPatternMsg = '卡号必须为16或19位的数字！'
 const phoneNoRequiredMsg = '手机号码不能为空！'
@@ -38,6 +50,9 @@ export function ruleCheck(val, ruleStr) {
   console.log(Vue)
   let flag = true
   try {
+    if (ruleStr === null) {
+      return true
+    }
     ruleStr.forEach(v => {
       if (v.required === true) {
         if (!val) {
@@ -60,7 +75,14 @@ export function ruleCheck(val, ruleStr) {
   }
   return flag
 }
-
+/**
+ * @param {string} clientNo 客户号验证   ClientNoPatternMsg ClientNoRequiredMsg
+ * @returns {Boolean}
+ */
+export function isClientNo() {
+  const pattern = clientNoPattern
+  return [{ required: true, message: clientNoRequiredMsg }, { pattern, message: clientNoPatternMsg }]
+}
 /**
  * @param {string} cardNo 银行卡号验证   CardNoPatternMsg CardNoRequiredMsg
  * @returns {Boolean}
@@ -125,8 +147,25 @@ export function validatenull(val) {
 }
 
 Vue.prototype.validate = {
-  isCardNo: isCardNo(),
-  isPhoneNo: isPhoneNo(),
-  isMsgNo: isMsgNo(),
+
   ruleCheck: ruleCheck
 }
+// 获取后台的所有验证规则
+// getAllPattern('1').then(res => {
+//   console.log(res)
+//   if (res.code === 0) {
+//     res.data.forEach(v => {
+//       if (v.validationFlag === '1') {
+//         var pattern = new RegExp(v.validationRule)
+//         var message = v.validationPrompt
+//         var patternRes = [{ pattern, message }]
+//         add(v.name, patternRes)
+//       } else {
+//         add(v.name, [])
+//       }
+//     })
+//     console.log(Vue.prototype.validate)
+//   } else {
+//     Toast(res.message)
+//   }
+// })

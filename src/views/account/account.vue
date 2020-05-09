@@ -4,17 +4,16 @@
     <!-- 卡信息 -->
     <div class="card-box">
       <div class="card-title"><span><img src="@/assets/images/logo.png" style="width:30px;">华夏个人借记卡</span> <a class="btn" @click="onAccDetailClick">查账</a></div>
-      <div class="card-center">{{ accInfo.ActNo ||'加载中...' }} <a class="btn" @click="onTimToSavClick">定活互转</a></div>
-      <div class="card-mark">开户行：{{ accInfo.AvailBalList[0].ActOpenBankBranch ||'加载中...' }}</div>
+      <div class="card-center"><div>{{ cardNo |accNoEncFilter }}</div> <a class="btn" @click="onTimToSavClick">定活互转</a></div>
+      <div class="card-mark">开户行：{{ accInfo.AvailBalList[0].ActOpenBankBranch }}</div>
       <div class="card-tools">
-        <div>{{ accInfo.AvailBalList[0].ActCurType ||'加载中...' }}</div>
-        <div>可用余额：{{ (accInfo.AvailBalList[0].ActAvaiBal|numberFormat) ||'加载中...' }}</div>
+        <div>{{ accInfo.AvailBalList[0].ActCurType }}</div>
+        <div>可用余额：{{ accInfo.AvailBalList[0].ActAvaiBal|amountFilter }}</div>
       </div>
     </div>
-    {{ '1233333333223423'|accNoEncFilter }}
     <!-- 积分 -->
-    <van-cell-group>
-      <van-cell :value="(accInfo.AvailBalList[0].CifIntegral||'0')+'（北京分行）'" title="客户综合积分" />
+    <van-cell-group class="cell-box">
+      <van-cell :value="accInfo.AvailBalList[0].CifIntegral||0" title="客户综合积分" />
     </van-cell-group>
   </div>
 </template>
@@ -24,13 +23,15 @@ export default {
   name: 'Account',
   data() {
     return {
+      cardNo: '',
       accInfo: { 'AvailBalList': [{}] } // 卡信息数据
     }
   },
   mounted() {
     // 从缓存中获取opennid
+    // const openId = 'oqPkFuJ3eqIrX-U0J1SxiapU44dc'// 测试
     const openId = sessionStorage.getItem('openId')
-    alert('缓存的openId：' + openId)
+    // alert('缓存的openId：' + openId)
     const data = {
       openId: openId
     }
@@ -38,8 +39,10 @@ export default {
     // 获取卡信息接口
     getAccount(data).then(res => {
       that.accInfo = res.data
-    }).catch(error => {
-      alert(JSON.stringify(error))
+      that.cardNo = that.accInfo.AvailBalList[0].CardNo
+      // this.$alert({ message: JSON.stringify(res.data) })
+    }).catch(() => {
+
     })
   },
   methods: {
@@ -100,5 +103,9 @@ export default {
         justify-content: space-between;
         padding: 10px 0;
     }
+
 }
+.cell-box{
+      padding: 0 16px;
+    }
 </style>

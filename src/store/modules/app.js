@@ -8,6 +8,11 @@ const state = {
 }
 
 const mutations = {
+  /**
+   * @param {Object} state vuex状态数据
+   * @param {string} text 右侧文字
+   * @description 设置标题右侧文字状态值
+   */
   SET_RIGHTTEXT: (state, text) => {
     state.rightText = text
   }

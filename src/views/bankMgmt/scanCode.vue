@@ -2,12 +2,12 @@
   <div>
     <van-form @submit="onSubmit" @failed="onFailed">
       <van-field
-        v-model="phone"
-        :rules="validate.isPhoneNo"
+        v-model="clientNo"
+        :rules="validate.isClientNo"
         type="tel"
-        name="手机号码"
-        label="手机号码"
-        placeholder="请输入手机号码"
+        name="客户号"
+        label="客户号"
+        placeholder="请输入客户号"
         clearable
         required
       />
@@ -35,7 +35,7 @@ export default {
   },
   data() {
     return {
-      phone: '',
+      clientNo: '',
       imgsrc: ''
     }
   },
@@ -49,7 +49,7 @@ export default {
      */
     onSubmit() {
       const data = {
-        Mobilephone: this.phone
+        Mobilephone: this.clientNo
       }
       const that = this
       getScanCode(data).then(res => {
@@ -65,7 +65,7 @@ export default {
      */
     onFailed() {
       // 表单验证
-      var flag1 = this.validate.ruleCheck(this.phone, this.validate.isPhoneNo)
+      var flag1 = this.validate.ruleCheck(this.clientNo, this.validate.isClientNo)
       if (!flag1) {
         return
       }

@@ -13,7 +13,7 @@
         <!-- 输入卡号 -->
         <van-field
           v-model="cardNo"
-          :rules="validate.isCardNo"
+          :rules="validate.CardNo==null?[]:validate.CardNo"
           type="digit"
           name="借记卡卡号"
           label="借记卡卡号"
@@ -24,7 +24,7 @@
         <!-- 输入手机号 -->
         <van-field
           v-model="phone"
-          :rules="validate.isPhoneNo"
+          :rules="validate.Phone==null?[]:validate.Phone"
           type="tel"
           name="预留手机号"
           label="预留手机号"
@@ -35,7 +35,7 @@
         <!-- 输入短信验证码 -->
         <van-field
           v-model="code"
-          :rules="validate.isMsgNo"
+          :rules="validate.MsgVali==null?[]:validate.MsgVali"
           type="text"
           name="短信验证码"
           label="短信验证码"
@@ -71,7 +71,7 @@
         <!-- 输入信用卡卡号 -->
         <van-field
           v-model="creCardNo"
-          :rules="validate.isCardNo"
+          :rules="validate.CardNo==null?[]:validate.CardNo"
           type="digit"
           name="信用卡卡号"
           label="信用卡卡号"
@@ -93,7 +93,7 @@
         <!-- 输入预留手机号 -->
         <van-field
           v-model="crePhone"
-          :rules="validate.isPhoneNo"
+          :rules="validate.Phone==null?[]:validate.Phone"
           type="tel"
           name="预留手机号"
           label="预留手机号"
@@ -104,7 +104,7 @@
         <!-- 输入短信验证码 -->
         <van-field
           v-model="creCode"
-          :rules="validate.isMsgNo"
+          :rules="validate.MsgVali==null?[]:validate.MsgVali"
           type="text"
           name="短信验证码"
           label="短信验证码"
@@ -136,12 +136,12 @@
 </template>
 
 <script>
-import { Dialog } from 'vant'
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper' // 轮播插件
 import 'swiper/css/swiper.css'// 轮播插件样式
 import { getMsgCode, bindCard } from '@/api/wxpocApi'// 接口
 // import JSEncrypt from 'jsencrypt'// rsa加密
 import '@/utils/validate'// 验证规则
+// import { encrypt } from '@/utils/aes' // aes加解密方法
 
 // import { strEnc } from '@/utils/des'
 
@@ -203,16 +203,12 @@ export default {
      * @description 借记卡绑卡事件
      */
     onSubmit() {
-      // rsa公钥
-      // const pubKey = `-----BEGIN PUBLIC KEY-----MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCIHShsTwbqF3k0r45nSH/8CSVPg+DWgwTAehHQxlqPBhnFD27mGz7fve/Unr5IrECDlQHQcl0kSi8n2U70woPfh5LC9BmdcI/+LhHwNfbBtR53zo/91EVsDPkghSggNpMhI3kWi1C0HVYs48rONajBl/E23BCY7ZBcs8JaX+9TgQIDAQAB-----END PUBLIC KEY-----`
-      // const encryptStr = new JSEncrypt()
-      // // 设置 加密公钥
-      // encryptStr.setPublicKey(pubKey)
-      // 进行rsa加密
-      // const cardNoEnc = encryptStr.encrypt(this.cardNo)
+      // aes加密
+      // const cardNoEnc = encrypt(this.cardNo)
       const openId = sessionStorage.getItem('openId')
+      // const openId = 'oqPkFuJ3eqIrX-U0J1SxiapU44dc'// 测试
       const params = {
-        openid: openId || 'ertgft4545345',
+        openid: openId,
         CardNo: this.cardNo,
         BankAcType: '1',
         Phone: this.phone,
@@ -224,10 +220,7 @@ export default {
       // 发送绑卡接口
       const that = this
       bindCard(params).then(res => {
-        Dialog.alert({
-          title: '提示',
-          message: res.message
-        }).then(() => {
+        this.$alert({ message: JSON.stringify(res.message) }).then(() => {
           params.No = that.cardNo
           params.Balance = res.data.Balance
           // 跳转绑卡结果页
@@ -244,15 +237,15 @@ export default {
      */
     onFailed() {
       // 表单验证
-      var flag = this.validate.ruleCheck(this.cardNo, this.validate.isCardNo)
+      var flag = this.validate.ruleCheck(this.cardNo, this.validate.CardNo)
       if (!flag) {
         return
       }
-      var flag1 = this.validate.ruleCheck(this.phone, this.validate.isPhoneNo)
+      var flag1 = this.validate.ruleCheck(this.phone, this.validate.Phone)
       if (!flag1) {
         return
       }
-      var flag2 = this.validate.ruleCheck(this.code, this.validate.isMsgNo)
+      var flag2 = this.validate.ruleCheck(this.code, this.validate.MsgVali)
       if (!flag2) {
         return
       }
@@ -262,22 +255,24 @@ export default {
      * @description 获取短信验证码
      */
     getCode() {
-      var flag = this.validate.ruleCheck(this.cardNo, this.validate.isCardNo)
+      var flag = this.validate.ruleCheck(this.cardNo, this.validate.CardNo)
       if (!flag) {
         return
       }
-      var flag1 = this.validate.ruleCheck(this.phone, this.validate.isPhoneNo)
+      var flag1 = this.validate.ruleCheck(this.phone, this.validate.Phone)
       if (!flag1) {
         return
       }
       if (!this.counting) {
+        // aes加密
+
         const params = {
           CardNo: this.cardNo,
           BankAcType: '1',
           Phone: this.phone
         }
         getMsgCode(params).then(res => {
-          this.$toast(res.message)
+          this.$toast({ message: JSON.stringify(res.message), duration: 3000 })
           this.counting = true
         })
       } else {

@@ -7,7 +7,7 @@ import request from '@/utils/request'
 // 获取账户
 export function getCard(data) {
   return request({
-    url: 'myaccount',
+    url: '/wcb/myaccount',
     method: 'get',
     params: data
   })

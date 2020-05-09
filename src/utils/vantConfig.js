@@ -2,7 +2,6 @@ import Vue from 'vue'
 import { Dialog } from 'vant'
 import { Toast } from 'vant'
 Vue.use(Toast)
-
 // 引入常用的组件
 import { Button, Cell, CellGroup, Row, Col, Form, Field, Tag, Tab, Tabs, RadioGroup, Radio, Checkbox, CheckboxGroup, Icon } from 'vant'
 Vue.use(Button)
@@ -88,3 +87,4 @@ export var vantModule = {
 }
 Vue.prototype.$vant = vantModule
 Vue.prototype.$toast = Toast
+Vue.prototype.$alert = Dialog.alert

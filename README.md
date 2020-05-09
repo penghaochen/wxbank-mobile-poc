@@ -9,7 +9,7 @@
 git clone XXXXX.git
 
 # 进入项目目录
-cd vue-admin-template
+cd XXXXX
 
 # 安装依赖
 npm install
@@ -21,7 +21,7 @@ npm install --registry=https://registry.npm.taobao.org
 npm run dev
 ```
 
-浏览器访问 [http://localhost:6255](http://localhost:6255)
+浏览器访问 [http://localhost:8088](http://localhost:8088)
 
 ## 发布
 
