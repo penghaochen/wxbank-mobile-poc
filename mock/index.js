@@ -3,11 +3,12 @@ import { param2Obj } from '../src/utils'
 import home from './home'
 import login from './login'
 import userinfo from './user'
-
+import poc from './poc'
 const mocks = [
   ...home,
   ...login,
-  ...userinfo
+  ...userinfo,
+  ...poc
 
 ]
 

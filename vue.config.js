@@ -15,12 +15,13 @@ module.exports = {
     port: 8088,
     proxy: {
       '/pmobile': {
+        target: `http://0.0.0.0:8088/mock`, // 本地mock数据
         // target: 'http://192.168.228.222:8762', // 微信地址
         // target: 'http://192.168.230.101:9003', // 曾地址
         // target: 'https://api.weixin.qq.com', // 微信网关地址
         // target: 'http://192.168.228.121:9000', // 涛测试地址
         // target: 'http://192.168.232.92:9001', // 鼎测试地址
-        target: 'http://192.168.230.157:8888', // 传奇测试地址
+        // target: 'http://192.168.230.157:8888', // 传奇测试地址
         changeOrigin: true,
         ws: true,
         pathRewrite: {

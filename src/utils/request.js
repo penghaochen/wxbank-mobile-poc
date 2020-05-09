@@ -30,8 +30,8 @@ service.interceptors.request.use(
     // config.headers.BL = 'oqPkFuF2PWLIoLC3MMEK4inu2FCk'
     if (config.url.indexOf('/trans/dictionary/getDictionaryList') !== 0) {
       // 接口加密
-      const data = encrypt(JSON.stringify(config.data))
-      config.data = { data: data }
+      // const data = encrypt(JSON.stringify(config.data))
+      // config.data = { data: data }
     }
     // 获取token
     // if (!config.headers['X-Litemall-Token']) {
@@ -47,9 +47,8 @@ service.interceptors.request.use(
 // 返回拦截器
 service.interceptors.response.use(
   response => {
-    console.log(response.config.url)
     store.state.app.show = false // 关闭遮罩
-    let res = response.data // 获取数据
+    const res = response.data // 获取数据
     if (response.config.url.indexOf('/trans/dictionary/getDictionaryList') === 0) {
       if (res.code === 0) {
         // 成功
@@ -63,7 +62,7 @@ service.interceptors.response.use(
         return Promise.reject(res)
       }
     }
-    res = JSON.parse(decrypt(res.result))
+    // res = JSON.parse(decrypt(res.result))
     if (res.returnCode === '000000') {
       // 成功
       return res

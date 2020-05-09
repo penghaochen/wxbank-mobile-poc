@@ -21,14 +21,14 @@ Vue.component(VueCountdown.name, VueCountdown)
 // Vue.use(filters)
 Vue.mixin(mixin)
 // 模拟交易数据
-// import {
-//   mockXHR
-// } from '../mock'
+import {
+  mockXHR
+} from '../mock'
 
-// if (process.env.NODE_ENV === 'development') {
-// // 使用mock数据 放开注释
-//   mockXHR()
-// }
+if (process.env.NODE_ENV === 'development') {
+// 使用mock数据 放开注释
+  mockXHR()
+}
 Vue.config.productionTip = false
 
 const opt = {
