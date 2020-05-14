@@ -5,7 +5,7 @@
  */
 import Vue from 'vue'
 import { Toast } from 'vant'
-import { getAllPattern } from '@/api/backMgmtApi'// 接口
+// import { getAllPattern } from '@/api/backMgmtApi'// 接口
 
 // export const idCard = /^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/
 
@@ -21,13 +21,13 @@ import { getAllPattern } from '@/api/backMgmtApi'// 接口
 // export const emailReg = /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/
 
 // 添加变量属性
-function add(name, value) {
-  const obj = { }
-  obj[name] = value// 返回参数
-  console.log(JSON.stringify(obj))
-  Object.assign(Vue.prototype.validate, obj)
-  return
-}
+// function add(name, value) {
+//   const obj = { }
+//   obj[name] = value// 返回参数
+//   console.log(JSON.stringify(obj))
+//   Object.assign(Vue.prototype.validate, obj)
+//   return
+// }
 // const numberPattern = /^[0-9]+$/ // 只有数字正则
 const clientNoPattern = /^[0-9]+$/ // 客户号数字正则
 const cardNoPattern = /^([1-9]{1})(\d{15}|\d{18})$/ // 银行卡号正则

@@ -74,7 +74,7 @@ export default [
   {
     url: '/user/logout',
     type: 'post',
-    response: _ => {
+    response: () => {
       return {
         code: 20000,
         data: 'success'

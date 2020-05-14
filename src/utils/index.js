@@ -119,7 +119,6 @@ export const randomLenNum = (len, date) => {
   return random
 }
 
-
 /**
  * 将普通列表无限递归转换为树
  * @param  {[type]} list       [普通的列表，必须包括 opt.primaryKey 指定的键和 opt.parentKey 指定的键]
@@ -127,7 +126,7 @@ export const randomLenNum = (len, date) => {
  * @return {[type]}            [description]
  */
 export const listConvertTree = (array, opt) => {
-  let obj = {
+  const obj = {
     primaryKey: opt.primaryKey || 'id',
     parentKey: opt.parentKey || 'pid',
     startPid: opt.startPid || 0,
@@ -155,7 +154,7 @@ export const listToTree = (array, startPid, currentDept, opt) => {
       // 筛查符合条件的数据（主键 = startPid）
       if (typeof item[opt.parentKey] !== 'undefined' && item[opt.parentKey] === startPid) {
         // 满足条件则递归
-        let nextChild = listToTree(array, item[opt.primaryKey], currentDept + 1, opt)
+        const nextChild = listToTree(array, item[opt.primaryKey], currentDept + 1, opt)
         // 节点信息保存
         if (nextChild.length > 0) {
           item['hasChild'] = true
@@ -172,7 +171,6 @@ export const listToTree = (array, startPid, currentDept, opt) => {
   return child
 }
 
-
 /**
  *  将json变成序列化形式
  * @param data json数据
@@ -180,12 +178,12 @@ export const listToTree = (array, startPid, currentDept, opt) => {
  * @returns {String}
  */
 export const JsonToQueryString = (data) => {
-  let dataStr = ''; //数据拼接字符串
+  let dataStr = '' // 数据拼接字符串
   Object.keys(data).forEach(key => {
-    //过滤空字段
+    // 过滤空字段
     // if (data[key].length > 0 && data[key] !== undefined)
-    dataStr += key + '=' + data[key] + '&';
-  });
-  dataStr = dataStr.substr(0, dataStr.lastIndexOf('&'));
+    dataStr += key + '=' + data[key] + '&'
+  })
+  dataStr = dataStr.substr(0, dataStr.lastIndexOf('&'))
   return dataStr
 }

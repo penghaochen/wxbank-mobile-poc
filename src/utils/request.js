@@ -14,7 +14,7 @@ import {
   headers
 } from '@/api/api.config'
 import router from '@/router/router.config'
-import { encrypt, decrypt } from '@/utils/aes' // aes加解密方法
+// import { encrypt, decrypt } from '@/utils/aes' // aes加解密方法
 // axios 配置
 const service = axios.create({
   baseURL: baseUrl, // 请求根路径
